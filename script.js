@@ -1,44 +1,43 @@
-document.getElementById('send-btn').addEventListener('click', async () => {
-    const inputField = document.getElementById('user-input');
-    const userInput = inputField.value.trim();
+async function askQuestion() {
+    const question = document.getElementById('question').value;
+    const apiUrl = 'https://6088-34-139-251-69.ngrok-free.app/ask?input=' + encodeURIComponent(question);
 
-    if (!userInput) return;
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
 
-    // Display user input in the chat
-    displayMessage('user', userInput);
+        // Check if the response is in JSON format
+        const contentType = response.headers.get("content-type");
+        
+        if (contentType && contentType.includes("application/json")) {
+            // Parse response as JSON
+            const data = await response.json();
+            
+            // Display the answer and context
+            document.getElementById('response').innerText = data.answer;
+            const contextData = data.context.map(item => `${item.metadata.source}\n${item.page_content}\n\n`).join('');
+            document.getElementById('context').innerText = contextData;
+        } else {
+            // If not JSON, convert the response to text
+            const textData = await response.text();
+            
+            // Optionally, convert the text into a JSON-like object
+            const fallbackData = {
+                answer: "Non-JSON response received",
+                responseText: textData
+            };
 
-    // Send the question to the backend
-    const response = await askQuestion(userInput);
+            // Display the fallback response
+            document.getElementById('response').innerText = fallbackData.answer;
+            document.getElementById('context').innerText = fallbackData.responseText;
+        }
 
-    // Display the bot's response in the chat
-    displayMessage('bot', response.answer);
-
-    // Clear the input field
-    inputField.value = '';
-});
-
-async function askQuestion(question) {
-    const response = await fetch('https://3331-34-80-148-202.ngrok-free.app/ask', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            question: question,
-            chat_history: [],
-        }),
-    });
-
-    return response.json();
-}
-
-function displayMessage(sender, message) {
-    const chatBox = document.getElementById('chat-box');
-    const messageElement = document.createElement('div');
-
-    messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-    messageElement.textContent = message;
-
-    chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (error) {
+        console.error('Error fetching API:', error);
+        document.getElementById('response').innerText = `Error: ${error.message}`;
+    }
 }

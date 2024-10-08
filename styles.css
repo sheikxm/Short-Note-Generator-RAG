@@ -1,17 +1,20 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
 }
 
 .container {
-    width: 50%;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
+    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
 }
 
 h1 {
@@ -19,39 +22,54 @@ h1 {
     color: #333;
 }
 
-#chat-box {
-    height: 300px;
-    border: 1px solid #ddd;
-    padding: 10px;
+.chat-box {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 300px;
     overflow-y: scroll;
     margin-bottom: 20px;
-    background-color: #fafafa;
+    border: 1px solid #ddd;
 }
 
-.input-box {
+.chat-box .message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-box .message.user {
+    background-color: #d1e7dd;
+    text-align: right;
+}
+
+.chat-box .message.bot {
+    background-color: #f8d7da;
+}
+
+.input-area {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
 }
 
-#user-input {
-    width: 80%;
+input[type="text"] {
+    flex: 1;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
 }
 
-#send-btn {
-    width: 18%;
-    padding: 10px;
-    background-color: #4CAF50;
+button {
+    background-color: #4caf50;
     color: white;
     border: none;
+    padding: 10px 20px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
 }
 
-#send-btn:hover {
+button:hover {
     background-color: #45a049;
 }

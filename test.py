@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = getpass.getpass("AIzaSyA2NDYc5CSWAKZWItk4xLf5dT5znp18aNY")
+    os.environ["GOOGLE_API_KEY"] = getpass.getpass("AIzaSyDBR53kk5SVMmVacCf2oysPoTDWUAbpBo4")
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
