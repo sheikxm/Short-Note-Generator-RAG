@@ -576,9 +576,3 @@ async def ask_question(request: QuestionRequest):
     # Return the model's answer
     return {"answer": response["answer"], "context": response["context"]}
 
-
-ngrok_tunnel = ngrok.connect(8000)
-print('Public URL:', ngrok_tunnel.public_url)
-nest_asyncio.apply()
-uvicorn.run(app, port=8000)
-
