@@ -572,7 +572,6 @@ async def ask_question(request: QuestionRequest):
 
     # Invoke the app with the new question
     response = workflow.invoke({"input": user_input}, config=config)
-
-    # Return the model's answer
+urn the model's answer
     return {"answer": response["answer"], "context": response["context"]}
 
