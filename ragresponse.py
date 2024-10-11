@@ -454,7 +454,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:5500"],  # Allow your local origin
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods
+    allow_methods=["*"],  # Allow all mds
     allow_headers=["*"],  # Allow all headers
 )
 
